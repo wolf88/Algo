@@ -1,0 +1,69 @@
+vector <int>subMax(vector <int> &A,int N);
+int main()
+{
+	vector <int> A = { 1, 4, -3, 9, 5, -6 };
+	vector <int> C; C.resize(size(A));
+	int N = A.size();
+	vector <int> T = subMax(A,N);
+	auto it = max_element(A.begin(), A.end());
+	auto it1 = max_element(T.begin(), T.end());
+	auto it2 = max_element(T.begin(), T.end());
+	int index;
+
+	if (it != A.end())
+	{
+		index = distance(A.begin(), it);
+		while (N > 0) {
+			if (index == *it2)
+			{
+				it2 = it2 - 1;
+				break;
+			}
+			N = N - 1;
+		}
+
+	}
+
+	int B =  *it2;
+
+	int N2 = (*it1-*it2)-1 ;
+	int N3 = A.size();
+	for (int k = 0; k < N3; k++)
+	{
+		C[k] = A[(k + B + 1) % N3];
+	}
+	for(int j =0;j<N2;j++)
+		cout << C[j]<<endl;
+	return 0;
+	
+
+}
+vector <int> subMax(vector <int> &A, int N)
+{
+	vector<int> *ptr1 = &A;
+	vector<int> T;
+	T.resize(N);
+	vector<int> *ptr2 = &T;
+	int k = 0;
+	int sum = 0;
+	
+	for (int i = 0; i < N; i++)
+	{
+		if (ptr1->at(i) < 0)
+		{
+			ptr2->at(k) = i;
+			ptr1->at(i) = sum;
+			k = k + 1;
+			sum = 0;
+		}
+
+		else
+		{
+			sum = sum + ptr1->at(i);
+
+
+		}
+	}
+
+	return T;
+}
