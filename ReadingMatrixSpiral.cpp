@@ -49,3 +49,23 @@ int main()
 	return 0;
 
 }
+vector<vector<int >> transpose(vector<vector<int >>& A)
+{
+	int R = A.size();
+	int W = A[0].size();
+	vector<vector<int >> temp;
+	vector<vector<int >> temp1 =A;
+	temp.resize(temp1[0].size());
+
+	for (int j = 0; j < W; j++)
+	{
+		temp[j].resize(temp1.size());
+		
+		for (int i= 0; i < R; i++)
+		{
+
+			temp[j][i] = temp1[R+i-2][W-j-1];
+		}
+	}
+	return temp;
+}
